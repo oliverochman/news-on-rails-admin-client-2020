@@ -1,1 +1,0 @@
-# news-on-rails-admin-client-2020
