@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './components/Login';
 import ArticlePage from './components/ArticlePage';
+
 class App extends Component {
   state = {
     authenticated: false
