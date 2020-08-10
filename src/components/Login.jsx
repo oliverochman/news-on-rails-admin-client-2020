@@ -11,7 +11,7 @@ class Login extends Component {
   authenticate = async (event) => {
     event.preventDefault()
     try {
-      let response = await axios.post("/auth", {
+      let response = await axios.post("/auth/sign_in", {
         email: event.target.email.value,
         password: event.target.password.value
 
@@ -31,7 +31,7 @@ class Login extends Component {
     this.state.renderForm ? (
       form = <LoginForm authenticate={this.authenticate} />
     ) : (
-      button = <button id="login" onClick={this.setState({ renderForm: true })}>Login</button>
+      button = <button id="login" onClick={() => this.setState({ renderForm: true })}>Login</button>
     )
     return (
       <div>

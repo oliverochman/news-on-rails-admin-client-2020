@@ -9,7 +9,7 @@ const LoginForm = (props) => {
             <input name='name' type='email' id='email' />
             <label id='label'>Password</label>
             <input name='password' type='password' id='password'/>
-            <button id='Submit'>Login</button>
+            <button id='submit'>Login</button>
         </form>
     )
   }
