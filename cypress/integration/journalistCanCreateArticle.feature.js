@@ -10,11 +10,10 @@ describe("Journalist can create article", () => {
         uid: "journalist@mail.com"
       }
     })
-    cy.get("#login").click()
     cy.get("#login-form").within(() => {
       cy.get("#email").type("journalist@mail.com")
       cy.get("#password").type("password")
-      cy.get("button").contains("Submit").click()
+      cy.get("button").contains("Login").click()
     })
   })
 
