@@ -24,7 +24,7 @@ describe("Journalist can create article", () => {
   })
   it("journalist can create an article successfully", () => {
   cy.get("button").contains("Create Article").click()
-  cy.get("article-form").within(() => {
+  cy.get("#article-form").within(() => {
     cy.get("#title").type("Title")
     cy.get("#lead").type("Lead")
     cy.get("#content").type("This is content")
