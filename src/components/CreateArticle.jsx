@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Form, Button, Select, TextArea, Input } from "semantic-ui-react";
+import { Form, Button, TextArea, Input } from "semantic-ui-react";
 
 const categoryOptions = [
   { key: "c", text: "Culture", value: "culture" },

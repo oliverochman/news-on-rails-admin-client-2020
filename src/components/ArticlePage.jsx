@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CreateArticle from "./CreateArticle";
-import { Button } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 
 class ArticlePage extends Component {
   state = {
@@ -23,10 +23,10 @@ class ArticlePage extends Component {
         ));
     return (
       <>
-      <div class="ui content container">
+      <Container>
         {form}
         {button}
-      </div>
+      </Container>
       </>
     );
   }
