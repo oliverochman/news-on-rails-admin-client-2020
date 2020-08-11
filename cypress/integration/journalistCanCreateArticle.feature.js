@@ -13,7 +13,8 @@ describe("Journalist can create article", () => {
     cy.get("#article-form").within(() => {
       cy.get("#title").type("Title");
       cy.get("#lead").type("Lead");
-      cy.get('[name="category"]').click()
+      cy.get("#category").click()
+      cy.get("div[role='option']").contains("Lifestyle").click()
       cy.get("#content").type("This is content");
       cy.file_upload("img.jpeg", "#image-upload", "image/jpeg");
       cy.get("button").contains("Save Article").click();

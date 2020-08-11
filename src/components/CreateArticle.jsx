@@ -13,6 +13,7 @@ const categoryOptions = [
 
 class CreateArticle extends Component {
   state = {
+    selectedCategory: "",
     message: "",
   };
 
@@ -27,14 +28,14 @@ class CreateArticle extends Component {
   submitArticle = async (event) => {
     event.preventDefault();
     let responseMessage, articleParams, encodedImage, response;
-    let { title, lead, content, category, image } = event.target;
-    debugger
+    let { title, lead, content, image } = event.target;
+    
     try {
       articleParams = {
         title: title.value,
         lead: lead.value,
         content: content.value,
-        category: category.value,
+        category: this.state.selectedCategory,
       };
 
       if (image.files[0]) {
@@ -56,8 +57,13 @@ class CreateArticle extends Component {
     }
   };
 
+  handleCategoryChange = (value) => {
+    this.setState({selectCategory: value})
+  }
+
   render() {
     return (
+      <>
         <Form onSubmit={this.submitArticle} id="article-form">
           <Form.Group widths="equal">
             <Form.Field
@@ -74,16 +80,13 @@ class CreateArticle extends Component {
               name="lead"
               label="Lead"
             />
-            <Form.Field
-              control={Select}
+            <Form.Select
+              onChange={(event, data) => {this.handleCategoryChange(data.value)}}
               options={categoryOptions}
-              label={{
-                children: "Category",
-                htmlFor: "form-select-control-category",
-              }}
               placeholder="Category"
               id="category"
               name="category"
+              label="Category"
             />
           </Form.Group>
           <Form.Field
@@ -98,8 +101,9 @@ class CreateArticle extends Component {
           </Form.Group>
 
           <Button type="submit">Save Article</Button>
-        {this.state.message && <p id="message">{this.state.message}</p>}
         </Form>
+        {this.state.message && <p id="message">{this.state.message}</p>}
+      </>
     );
   }
 }
