@@ -1,14 +1,54 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class CreateArticle extends Component {
+  state = {
+    message: ""
+  }
+
+  toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+
   submitArticle = async (event) => {
     event.preventDefault();
-    let { title, lead, content, category } = event.target;
+    let responseMessage, articleParams, encodedImage, response
+    let { title, lead, content, category, image } = event.target;
 
-    debugger;
+    try {
+      articleParams = {
+        title: title.value,
+        lead: lead.value,
+        content: content.value,
+        category: category.value
+      }
+
+      if (image.files[0]) {
+        encodedImage = await this.toBase64(image.files[0])
+        articleParams.image = encodedImage
+      }
+
+      response = await axios.post(
+        "http://localhost:3000/api/v1/articles",
+        { article: articleParams },
+        { headers: { "Content-Type": "application/json"} }
+      );
+
+      responseMessage = response.data.message
+    } catch(error) {
+      responseMessage = response.data.error
+    } finally {
+      this.setState({ message: responseMessage })
+    }
   };
+
+
   render() {
     return (
+      <>
       <form onSubmit={this.submitArticle} id="article-form">
         <input placeholder="title" id="title" name="title" />
         <input placeholder="lead" id="lead" name="lead" />
@@ -29,6 +69,8 @@ class CreateArticle extends Component {
 
         <button type="submit">Save Article</button>
       </form>
+      {this.state.message && <p id="message">{this.state.message}</p>}
+      </>
     );
   }
 }

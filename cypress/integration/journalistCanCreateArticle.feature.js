@@ -32,8 +32,5 @@ describe("Journalist can create article", () => {
     cy.get("select#category").select('lifestyle')
     cy.get("button").contains("Save Article").click()
   })
-
-  it("journalist can see saved article on login")
-  cy.get("article").contains("This is content")
 })
 })
