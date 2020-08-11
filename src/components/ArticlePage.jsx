@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CreateArticle from "./CreateArticle";
+import { Button } from 'semantic-ui-react';
 
 class ArticlePage extends Component {
   state = {
@@ -13,12 +14,12 @@ class ArticlePage extends Component {
     this.state.renderForm
       ? (form = <CreateArticle authenticate={this.authenticate} />)
       : (button = (
-          <button
+          <Button
             id="create-article"
             onClick={() => this.setState({ renderForm: true })}
           >
             Create Article
-          </button>
+          </Button>
         ));
     return (
       <div>
