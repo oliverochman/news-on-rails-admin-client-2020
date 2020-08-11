@@ -15,7 +15,7 @@ describe("Journalist can create article", () => {
       cy.get("#lead").type("Lead");
       cy.get("#content").type("This is content");
       cy.file_upload("img.jpeg", "#image-upload", "image/jpeg");
-      cy.get("select#category").select("lifestyle");
+      cy.get('[name="category"]').click()
       cy.get("button").contains("Save Article").click();
     });
   });

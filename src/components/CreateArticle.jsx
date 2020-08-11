@@ -1,5 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Form, Button, Select, TextArea, Input } from "semantic-ui-react";
+
+const categoryOptions = [
+  { key: "c", text: "Culture", value: "culture" },
+  { key: "e", text: "Economy", value: "economy" },
+  { key: "i", text: "International", value: "international" },
+  { key: "li", text: "Lifestyle", value: "lifestyle" },
+  { key: "lo", text: "Local", value: "local" },
+  { key: "s", text: "Sports", value: "sports" },
+];
 
 class CreateArticle extends Component {
   state = {
@@ -48,30 +58,48 @@ class CreateArticle extends Component {
 
   render() {
     return (
-      <>
-        <form onSubmit={this.submitArticle} id="article-form">
-          <input placeholder="title" id="title" name="title" />
-          <input placeholder="lead" id="lead" name="lead" />
-          <input placeholder="content" id="content" name="content" />
-          <input
-            placeholder="image"
-            id="image-upload"
-            name="image"
-            type="file"
+        <Form onSubmit={this.submitArticle} id="article-form">
+          <Form.Group widths="equal">
+            <Form.Field
+              control={Input}
+              placeholder="Title"
+              id="title"
+              name="title"
+              label="Title"
+            />
+            <Form.Field
+              control={Input}
+              placeholder="Lead"
+              id="lead"
+              name="lead"
+              label="Lead"
+            />
+            <Form.Field
+              control={Select}
+              options={categoryOptions}
+              label={{
+                children: "Category",
+                htmlFor: "form-select-control-category",
+              }}
+              placeholder="Category"
+              id="category"
+              name="category"
+            />
+          </Form.Group>
+          <Form.Field
+            control={TextArea}
+            placeholder="Content"
+            id="content"
+            name="content"
+            label="Content"
           />
-          <select placeholder="cateogry" id="category" name="category">
-            <option value="culture">Culture</option>
-            <option value="economy">Economy</option>
-            <option value="international">International</option>
-            <option value="lifestyle">Lifestyle</option>
-            <option value="local">Local</option>
-            <option value="sports">Sports</option>
-          </select>
+          <Form.Group>
+            <Input id="image-upload" name="image" type="file" />
+          </Form.Group>
 
-          <button type="submit">Save Article</button>
-        </form>
+          <Button type="submit">Save Article</Button>
         {this.state.message && <p id="message">{this.state.message}</p>}
-      </>
+        </Form>
     );
   }
 }
