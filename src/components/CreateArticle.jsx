@@ -28,7 +28,7 @@ class CreateArticle extends Component {
     event.preventDefault();
     let responseMessage, articleParams, encodedImage, response;
     let { title, lead, content, category, image } = event.target;
-
+    debugger
     try {
       articleParams = {
         title: title.value,
