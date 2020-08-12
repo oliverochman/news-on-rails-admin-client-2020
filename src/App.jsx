@@ -3,9 +3,6 @@ import ArticlePage from "./components/ArticlePage";
 import { Header, Icon } from "semantic-ui-react"
 
 class App extends Component {
-  state = {
-    authenticated: false,
-  };
   render() {
     return (
       <>
