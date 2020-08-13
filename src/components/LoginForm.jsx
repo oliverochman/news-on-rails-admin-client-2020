@@ -7,7 +7,7 @@ const LoginForm = (props) => {
       <input name="name" type="email" id="email" />
       <label id="label">Password</label>
       <input name="password" type="password" id="password" />
-      <button id="submit">Login</button>
+      <button id="login-button">Login</button>
     </form>
   );
 };

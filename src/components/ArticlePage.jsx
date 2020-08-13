@@ -12,7 +12,7 @@ class ArticlePage extends Component {
     let form;
 
     this.state.renderForm
-      ? (form = <CreateArticle />)
+      ? (form = <CreateArticle authenticated={this.authenticate} />)
       : (button = (
           <Button
             id="create-article"
