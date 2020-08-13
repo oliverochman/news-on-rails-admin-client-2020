@@ -48,7 +48,7 @@ class CreateArticle extends Component {
         { article: articleParams },
         { headers: { "Content-Type": "application/json" } }
       );
-
+        
       responseMessage = response.data.message;
     } catch (error) {
       responseMessage = response.data.error;
@@ -81,7 +81,7 @@ class CreateArticle extends Component {
               label="Lead"
             />
             <Form.Select
-              onChange={(event, data) => {this.handleCategoryChange(data.value)}}
+              onChange={(data) => {this.handleCategoryChange(data.value)}}
               options={categoryOptions}
               placeholder="Category"
               id="category"
@@ -102,7 +102,7 @@ class CreateArticle extends Component {
 
           <Button type="submit">Save Article</Button>
         </Form>
-        {this.state.message && <p id="message">{this.state.message}</p>}
+        {this.state.message && <p id="response-message">{this.state.message}</p>}
       </>
     );
   }
