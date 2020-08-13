@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
-import { storeAuthCredentials } from "../modules/auth";
+import auth from "../modules/auth";
 import axios from "axios";
 
 class Login extends Component {
@@ -11,12 +11,11 @@ class Login extends Component {
   authenticate = async (event) => {
     event.preventDefault();
     try {
-      let response = await axios.post("/auth/sign_in", {
-        email: event.target.email.value,
-        password: event.target.password.value,
-      });
-
-      await storeAuthCredentials(response);
+      let response = await auth.signIn(
+        event.target.email.value,
+        event.target.password.value,
+      );
+      debugger
       this.props.setAuthenticated();
     } catch (error) {
       console.log(error);

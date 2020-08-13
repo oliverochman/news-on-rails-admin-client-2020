@@ -1,12 +1,8 @@
-const storeAuthCredentials = ({ headers }) => {
-  const credentials = {
-    uid: headers["uid"],
-    client: headers["client"],
-    access_token: headers["client"],
-    expiry: headers["expiry"],
-    token_type: "Bearer"
-  }
-  sessionStorage.setItem("credentials", JSON.stringify(credentials))
-}
+import JtockAuth from "j-tockauth";
 
-export { storeAuthCredentials }
+const auth = new JtockAuth({
+  host: "http://localhost:3000",
+  prefixUrl: "/api/v1"
+});
+
+export default auth;

@@ -12,7 +12,7 @@ class App extends Component {
     let login
     this.state.authenticated?(
       login = (
-        <p id="login-message">You are currently logged in as {JSON.parse(sessionStorage.getItem("credentials")).uid}</p>
+        <p id="login-message">You are currently logged in as {JSON.parse(localStorage.getItem("J-tockAuth-Storage")).uid}</p>
       )
     ):(
       login = (
