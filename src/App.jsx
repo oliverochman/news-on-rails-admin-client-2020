@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { Component } from "react";
+import ArticlePage from "./components/ArticlePage";
+import { Header, Icon } from "semantic-ui-react"
 
-const App = () => {
-  return (
-    <div>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <>
+      <Header as='h1' icon textAlign='center'>
+        <Icon name='train' circular/>
+        News on Rails  
+      </Header>
+        <div>
+          <ArticlePage />
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;
