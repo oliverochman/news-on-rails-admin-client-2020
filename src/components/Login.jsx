@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
 import auth from "../modules/auth";
-import axios from "axios";
 import { connect } from "react-redux";
 
 class Login extends Component {
@@ -28,12 +27,11 @@ class Login extends Component {
   };
 
   render() {
-    let button;
-    let form;
+    let loginForm, loginButton, loginMessage;
 
     this.state.renderForm
-      ? (form = <LoginForm authenticate={this.authenticate} />)
-      : (button = (
+      ? (loginForm = <LoginForm authenticate={this.authenticate} />)
+      : (loginButton = (
           <button
             id="login"
             onClick={() => this.setState({ renderForm: true })}
@@ -41,13 +39,22 @@ class Login extends Component {
             Login
           </button>
         ));
+
+    this.props.authenticated &&
+      (loginMessage = (
+        <p>Hello {this.props.userEmail}, have a productive day</p>
+      ));
     return (
       <div>
-        {button}
-        {form}
+        {loginForm}
+        {loginButton}
+        {loginMessage}
       </div>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return { userEmail: state.currentUser.email, authenticated: state.authenticated };
+};
 
-export default connect()(Login);
+export default connect(mapStateToProps)(Login);

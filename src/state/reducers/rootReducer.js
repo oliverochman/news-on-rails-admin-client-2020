@@ -1,4 +1,4 @@
-import initialState from "../store/initialState"
+import initialState from "../store/initialState";
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -6,14 +6,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         authenticated: true,
-        currentUser: action.payload.currentUser
-      }
-      break;
+        currentUser: action.payload.currentUser,
+      };
 
     default:
-      break;
+      return state;
   }
-  return state
-}
+};
 
 export default rootReducer;

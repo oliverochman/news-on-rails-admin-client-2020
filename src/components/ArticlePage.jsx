@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import CreateArticle from "./CreateArticle";
-import { Button, Container } from 'semantic-ui-react';
+import { Button, Container } from "semantic-ui-react";
 
 class ArticlePage extends Component {
   state = {
-    renderForm: false,  
+    renderForm: false,
   };
 
   render() {
-    let button;
-    let form;
+    let button, form;
 
-    {this.props.authenticated && (this.state.renderForm
-      ? (form = <CreateArticle authenticated={this.authenticated} />)
+    this.state.renderForm
+      ? (form = <CreateArticle />)
       : (button = (
           <Button
             id="create-article"
@@ -20,18 +19,17 @@ class ArticlePage extends Component {
           >
             Create Article
           </Button>
-        ))
-    )};
+        ));
+
     return (
       <>
-      <Container>
-        {form}
-        {button}
-      </Container>
+        <Container>
+          {form}
+          {button}
+        </Container>
       </>
     );
   }
 }
-
 
 export default ArticlePage;
