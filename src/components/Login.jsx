@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LoginForm from "./LoginForm";
 import auth from "../modules/auth";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class Login extends Component {
   state = {
@@ -13,9 +14,14 @@ class Login extends Component {
     try {
       let response = await auth.signIn(
         event.target.email.value,
-        event.target.password.value,
+        event.target.password.value
       );
-      this.props.setAuthenticated();
+      this.props.dispatch({
+        type: "AUTHENTICATE",
+        payload: {
+          currentUser: { email: response.data.email, role: response.data.role },
+        },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -44,4 +50,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect()(Login);

@@ -12,7 +12,7 @@ describe('Journalist can login', () => {
         url: "http://localhost:3000/api/v1/auth/**",
         response: "fixture:registration_response.json",
       })
-      
+      cy.visit('/')
     })
 
     it('Journalist can login', ()=> {
