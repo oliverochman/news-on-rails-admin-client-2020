@@ -15,7 +15,6 @@ class Login extends Component {
         event.target.email.value,
         event.target.password.value,
       );
-      debugger
       this.props.setAuthenticated();
     } catch (error) {
       console.log(error);

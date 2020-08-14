@@ -29,7 +29,7 @@ class App extends Component {
         {login}
       </div>
         <div>
-          <ArticlePage />
+          <ArticlePage authenticated={this.state.authenticated} />
         </div>
       </>
     );
