@@ -5,6 +5,7 @@
     "provider": "email",
     "uid": "journalist@mail.com",
     "name": "Tintin",
-    "allow_password_change": false
+    "allow_password_change": false,
+    "role": "journalist"
   }
 }

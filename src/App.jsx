@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ArticlePage from "./components/ArticlePage";
 import { Header, Icon } from "semantic-ui-react"
 import Login from "./components/Login"
+import { connect } from 'react-redux';
 
 class App extends Component {
   state = {
@@ -36,4 +37,6 @@ class App extends Component {
   }
 }
 
-export default App;
+
+
+export default connect()(App);

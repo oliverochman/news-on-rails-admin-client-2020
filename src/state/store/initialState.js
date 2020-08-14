@@ -1,5 +1,7 @@
 const initialState = {
-  message: 'Hello'
+  renderForm: false,
+  selectedCategory: "",
+  message: "",
 }
 
 export default initialState;
