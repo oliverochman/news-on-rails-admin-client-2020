@@ -22,7 +22,7 @@ describe('Journalist can login', () => {
         cy.get("#password").type("password");
         cy.get("#login-button").click();
       });
-      cy.get("button").contains("Create Article").should('be.visible');
+      cy.get("#create-article").contains("Create Article").should('be.visible');
     })
   })
 
