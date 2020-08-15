@@ -28,13 +28,6 @@ const LoginForm = (props) => {
         </Grid.Column>
       </Grid>
     </Segment>
-
-
-
-
-
-
-
   );
 };
 

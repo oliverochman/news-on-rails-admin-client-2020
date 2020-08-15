@@ -45,7 +45,4 @@ describe('Journalist can login', () => {
       cy.get('#create-article').should('not.exist');
     })
   })
-
-
 })
-

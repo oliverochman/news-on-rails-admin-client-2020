@@ -28,9 +28,7 @@ class ArticlePage extends Component {
 
     return (
       <>
-      <div>
-        {loginMessage}
-      </div>
+        <div>{loginMessage}</div>
         <Container>
           {form}
           {button}
@@ -39,11 +37,13 @@ class ArticlePage extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     authenticated: state.authenticated,
     userRole: state.currentUser.role,
-    userEmail: state.currentUser.email
+    userEmail: state.currentUser.email,
   };
 };
+
 export default connect(mapStateToProps)(ArticlePage);
