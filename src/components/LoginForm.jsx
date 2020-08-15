@@ -21,6 +21,7 @@ const LoginForm = (props) => {
               iconPosition='left'
               label='Password'
               placeholder='Password'
+              type='password'
             />
             <Button content='Login' id="login-button" primary/>
           </Form>

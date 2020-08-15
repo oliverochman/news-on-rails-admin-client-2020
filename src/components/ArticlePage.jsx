@@ -23,7 +23,7 @@ class ArticlePage extends Component {
         ));
     this.props.authenticated &&
       (loginMessage = (
-        <p>Hello {this.props.userEmail}, have a productive day!</p>
+        <p id="welcome">Hello {this.props.userEmail}, have a productive day!</p>
       ));
 
     return (

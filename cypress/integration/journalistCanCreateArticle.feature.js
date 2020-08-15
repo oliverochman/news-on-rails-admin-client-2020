@@ -18,7 +18,6 @@ describe("Journalist can create article", () => {
         response: "fixture:registration_response.json",
       })
       cy.visit('/')
-      cy.get("#login").click();
       cy.get("#login-form").within(() => {
         cy.get("#email").type("journalist@mail.com");
         cy.get("#password").type("password");
@@ -62,7 +61,6 @@ describe("Journalist can create article", () => {
         response: "fixture:registration_response.json",
       })
       cy.visit('/')
-      cy.get("#login").click();
       cy.get("#login-form").within(() => {
         cy.get("#email").type("journalist@mail.com");
         cy.get("#password").type("password");

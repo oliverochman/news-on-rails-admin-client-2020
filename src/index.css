@@ -22,7 +22,7 @@ code {
   padding-bottom: 30px;
 }
 
-#portal{
+#portal {
   text-align: center;
 }
 
@@ -30,5 +30,10 @@ code {
 position: fixed;
 left: 35%;
 right: 35%;
+}
 
+#welcome {
+position: absolute;
+right: 80px;
+top: 10px;
 }
