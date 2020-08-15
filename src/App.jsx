@@ -25,18 +25,18 @@ const App = (props) => {
         <Icon name="train" circular />
         News on Rails
       </Header>
-      <Login />
       {/* <div>
         {login}
       </div> */}
-      {props.userRole === "journalist" && <ArticlePage />}
+      {props.userRole === "journalist" ? <ArticlePage /> : <Login />}
     </>
   );
 };
 const mapStateToProps = (state) => {
   return {
     authenticated: state.authenticated,
-    userRole: state.currentUser.role
+    userRole: state.currentUser.role,
+    userEmail: state.currentUser.email
   };
 };
 

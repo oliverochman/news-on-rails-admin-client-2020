@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CreateArticle from "./CreateArticle";
 import { Button, Container } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 class ArticlePage extends Component {
   state = {
@@ -8,7 +9,7 @@ class ArticlePage extends Component {
   };
 
   render() {
-    let button, form;
+    let button, form, loginMessage;
 
     this.state.renderForm
       ? (form = <CreateArticle />)
@@ -20,9 +21,16 @@ class ArticlePage extends Component {
             Create Article
           </Button>
         ));
+    this.props.authenticated &&
+      (loginMessage = (
+        <p>Hello {this.props.userEmail}, have a productive day</p>
+      ));
 
     return (
       <>
+      <div>
+        {loginMessage}
+      </div>
         <Container>
           {form}
           {button}
@@ -31,5 +39,11 @@ class ArticlePage extends Component {
     );
   }
 }
-
-export default ArticlePage;
+const mapStateToProps = (state) => {
+  return {
+    authenticated: state.authenticated,
+    userRole: state.currentUser.role,
+    userEmail: state.currentUser.email
+  };
+};
+export default connect(mapStateToProps)(ArticlePage);

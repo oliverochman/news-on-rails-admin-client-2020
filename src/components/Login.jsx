@@ -40,10 +40,6 @@ class Login extends Component {
           </button>
         ));
 
-    this.props.authenticated &&
-      (loginMessage = (
-        <p>Hello {this.props.userEmail}, have a productive day</p>
-      ));
     return (
       <div>
         {loginForm}
