@@ -3,10 +3,8 @@ import LoginForm from "./LoginForm";
 import auth from "../modules/auth";
 import { connect } from "react-redux";
 
+
 class Login extends Component {
-  state = {
-    renderForm: false,
-  };
 
   authenticate = async (event) => {
     event.preventDefault();
@@ -29,16 +27,8 @@ class Login extends Component {
   render() {
     let loginForm, loginButton, loginMessage;
 
-    this.state.renderForm
-      ? (loginForm = <LoginForm authenticate={this.authenticate} />)
-      : (loginButton = (
-          <button
-            id="login"
-            onClick={() => this.setState({ renderForm: true })}
-          >
-            Login
-          </button>
-        ));
+    (loginForm = <LoginForm authenticate={this.authenticate} />)
+
 
     return (
       <div>

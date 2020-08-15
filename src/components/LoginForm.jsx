@@ -1,14 +1,39 @@
 import React from "react";
+import { Button, Form, Grid, Segment } from 'semantic-ui-react'
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.authenticate} id="login-form">
-      <lable id="label">Email</lable>
-      <input name="name" type="email" id="email" />
-      <label id="label">Password</label>
-      <input name="password" type="password" id="password" />
-      <button id="login-button">Login</button>
-    </form>
+    <Segment placeholder>
+      <h3 id='portal' >Admin Portal</h3>
+      <Grid columns={1} relaxed='very' stackable>
+        <Grid.Column>
+          <Form onSubmit={props.authenticate} id="login-form">
+            <Form.Input
+              id="email"
+              icon='user'
+              iconPosition='left'
+              label='Email'
+              placeholder='Email'
+            />
+            <Form.Input
+              id="password"
+              icon='lock'
+              iconPosition='left'
+              label='Password'
+              placeholder='Password'
+            />
+            <Button content='Login' id="login-button" primary/>
+          </Form>
+        </Grid.Column>
+      </Grid>
+    </Segment>
+
+
+
+
+
+
+
   );
 };
 
