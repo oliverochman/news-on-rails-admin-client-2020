@@ -25,4 +25,29 @@ describe('Journalist can login', () => {
       cy.get("button").contains("Create Article").should('be.visible');
     })
   })
+
+  context('Unsucessfully', () => {
+    beforeEach(() => {
+      cy.server();
+      cy.route({
+        method: "POST",
+        url: "http://localhost:3000/api/v1/auth/sign_in",
+        response: '{"message": "Invalid credentials"}',
+        status: "401"
+      });
+      cy.visit('/')
+    })
+    it('with invalid credentials', () => {
+      cy.get("#login").click();
+      cy.get("#login-form").within(() => {
+        cy.get("#email").type("Viktor@mail.com");
+        cy.get("#password").type("password");
+        cy.get("#login-button").click();
+      });
+      cy.get('#create-article').should('not.exist');
+    })
+  })
+
+
 })
+
