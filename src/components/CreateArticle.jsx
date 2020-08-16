@@ -81,7 +81,7 @@ class CreateArticle extends Component {
               label="Lead"
             />
             <Form.Select
-              onChange={(data) => {this.handleCategoryChange(data.value)}}
+              onChange={(event, data) => {this.handleCategoryChange(data.value)}}
               options={categoryOptions}
               placeholder="Category"
               id="category"

@@ -21,3 +21,19 @@ code {
   padding-top: 20px;
   padding-bottom: 30px;
 }
+
+#portal {
+  text-align: center;
+}
+
+.ui.placeholder.segment {
+position: fixed;
+left: 35%;
+right: 35%;
+}
+
+#welcome {
+position: absolute;
+right: 80px;
+top: 10px;
+}
