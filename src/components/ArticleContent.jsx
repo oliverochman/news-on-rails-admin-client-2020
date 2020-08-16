@@ -8,6 +8,7 @@ const ArticleContent = (props) => {
         <h2 id="lead">{props.article.lead}</h2>
         <h2 id="content">{props.article.content}</h2>
         <h2 id="category">{props.article.category}</h2>
+        <img src={props.article.image}/>
       </div>
     </div>
   )
