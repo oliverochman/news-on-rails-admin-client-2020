@@ -58,7 +58,7 @@ class CreateArticle extends Component {
   };
 
   handleCategoryChange = (value) => {
-    this.setState({selectCategory: value})
+    this.setState({selectedCategory: value})
   }
 
   render() {
