@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CreateArticle from "./CreateArticle";
-import { Button, Container } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import axios from "axios";
 import ArticleContent from "./ArticleContent"
@@ -73,11 +73,11 @@ class ArticlePage extends Component {
     return (
       <>
         <div>{loginMessage}</div>
-        <Container>
           {form}
           {button}
-        </Container>
-        <div>{articles}</div>
+          <div className="articles">
+            {articles}
+          </div>
       </>
     );
   }
