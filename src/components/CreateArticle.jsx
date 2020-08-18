@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, TextArea, Input } from "semantic-ui-react";
 
-const categoryOptions = [
-  { key: "c", text: "Culture", value: "culture" },
-  { key: "e", text: "Economy", value: "economy" },
-  { key: "i", text: "International", value: "international" },
-  { key: "li", text: "Lifestyle", value: "lifestyle" },
-  { key: "lo", text: "Local", value: "local" },
-  { key: "s", text: "Sports", value: "sports" },
-];
+const CreateArticle = () => {
+  const [selectedCategory, setSelectedCategory] = useState("")
+  const [message, setMessage] = useState("")
+  const [renderArticleForm, setRenderArticleForm] = useState(false)
 
-class CreateArticle extends Component {
-  state = {
-    selectedCategory: "",
-    message: "",
-  };
+  const categoryOptions = [
+    { key: "c", text: "Culture", value: "culture" },
+    { key: "e", text: "Economy", value: "economy" },
+    { key: "i", text: "International", value: "international" },
+    { key: "li", text: "Lifestyle", value: "lifestyle" },
+    { key: "lo", text: "Local", value: "local" },
+    { key: "s", text: "Sports", value: "sports" },
+  ];
 
-  toBase64 = (file) =>
+  const toBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -25,22 +24,22 @@ class CreateArticle extends Component {
       reader.onerror = (error) => reject(error);
     });
 
-  submitArticle = async (event) => {
+  const submitArticle = async (event) => {
     event.preventDefault();
     let responseMessage, articleParams, encodedImage, response;
     let { title, lead, content, image } = event.target;
     const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-    
+
     try {
       articleParams = {
         title: title.value,
         lead: lead.value,
         content: content.value,
-        category: this.state.selectedCategory,
+        category: selectedCategory,
       };
 
       if (image.files[0]) {
-        encodedImage = await this.toBase64(image.files[0]);
+        encodedImage = await toBase64(image.files[0]);
         articleParams.image = encodedImage;
       }
 
@@ -49,23 +48,23 @@ class CreateArticle extends Component {
         { article: articleParams },
         { headers: headers }
       );
-        
+
       responseMessage = response.data.message;
     } catch (error) {
       responseMessage = response.data.error;
     } finally {
-      this.setState({ message: responseMessage });
+      setMessage(responseMessage);
     }
   };
 
-  handleCategoryChange = (value) => {
-    this.setState({selectedCategory: value})
+  const handleCategoryChange = (value) => {
+    setSelectedCategory(value)
   }
 
-  render() {
-    return (
+  return (
+    renderArticleForm ? (
       <>
-        <Form onSubmit={this.submitArticle} id="article-form">
+        <Form onSubmit={submitArticle} id="article-form">
           <Form.Group widths="equal">
             <Form.Field
               control={Input}
@@ -82,7 +81,7 @@ class CreateArticle extends Component {
               label="Lead"
             />
             <Form.Select
-              onChange={(event, data) => {this.handleCategoryChange(data.value)}}
+              onChange={(event, data) => { handleCategoryChange(data.value) }}
               options={categoryOptions}
               placeholder="Category"
               id="category"
@@ -103,10 +102,14 @@ class CreateArticle extends Component {
 
           <Button type="submit">Save Article</Button>
         </Form>
-        {this.state.message && <p id="response-message">{this.state.message}</p>}
+        <button onClick={() => setRenderArticleForm(false)}>Close form</button>
+        {message && <p id="response-message">{message}</p>}
       </>
-    );
-  }
+
+    ) : (
+        <button onClick={() => setRenderArticleForm(true)}>Create Article</button>
+      )
+  )
 }
 
-export default CreateArticle;
+export default CreateArticle

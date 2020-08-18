@@ -1,94 +1,95 @@
-import React, { Component } from "react";
-import CreateArticle from "./CreateArticle";
-import { Button } from "semantic-ui-react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ArticleContent from "./ArticleContent"
+import { useSelector } from "react-redux";
 
-class ArticlePage extends Component {
-  state = {
-    renderForm: false,
-    articles: [],
-    singleArticle: null,
-  };
+const ArticlePage = () => {
+  const [articles, setArticles] = useState([])
+  const [singleArticle, setSingleArticle] = useState(null)
+  const [message, setMessage] = useState(null)
+  const userRole = useSelector(state => state.currentUser.role)
 
-  componentDidMount = () => {
-    this.getArticles();
-  };
+  useEffect(() => {
+    getArticles()
+  }, [])
 
-  getArticles = async () => {
+
+  const getArticles = async () => {
     let response;
-    response = await axios.get("/articles")
-    this.setState({ articles: response.data.articles });
+    if (userRole == 'editor') {
+      response = await axios.get("/articles", {
+        params: {
+          published: false
+        }
+      })
+    } else {
+      response = await axios.get("/articles")
+    }
+    setArticles(response.data.articles);
   };
 
-  getSingleArticle = async (event) => {
+  const getSingleArticle = async (event) => {
     let id = event.target.parentElement.dataset.id;
     let response = await axios.get(`/articles/${id}`);
-    this.setState({ singleArticle: response.data.article });
+    setSingleArticle(response.data.article);
   };
 
-  closeSingleArticle = () => {
-    this.setState({
-      singleArticle: null,
-    });
+  const closeSingleArticle = () => {
+    setSingleArticle(null);
   };
 
-  render() {
-    let button, form, loginMessage, articles;
+  const publishArticle = async () => {
+    try {
+      const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+      let id = singleArticle.id
+      let response = await axios.put(`/articles/${id}`, {
+        publish: true
+      }, {
+        headers: headers
+      })
 
-    this.state.renderForm
-      ? (form = <CreateArticle />)
-      : (button = (
-          <Button
-            id="create-article"
-            onClick={() => this.setState({ renderForm: true })}
-          >
-            Create Article
-          </Button>
-        ));
-    this.props.authenticated &&
-      (loginMessage = (
-        <p id="welcome">Hello {this.props.userEmail}, have a productive day!</p>
-      ));
-
-    if (this.state.singleArticle) {
-      articles = (
-        <ArticleContent
-          article={this.state.singleArticle}
-          singleArticle={true}
-          closeSingleArticle={this.closeSingleArticle}
-        />
-      );
-    } else {
-      articles = this.state.articles.map((article) => (
-        <ArticleContent
-          article={article}
-          singleArticle={false}
-          closeSingleArticle={this.getSingleArticle}
-        />
-      ));
+      setSingleArticle(null)
+      setMessage(response.data.message)
+      getArticles()
+    } catch (error) {
+      console.log(error)
     }
-
-    return (
-      <>
-        <div>{loginMessage}</div>
-          {form}
-          {button}
-          <div className="articles">
-            {articles}
-          </div>
-      </>
-    );
   }
+
+  let button, form, content;
+ 
+  if (singleArticle) {
+    content = (
+      <ArticleContent
+        article={singleArticle}
+        singleArticle={true}
+        closeSingleArticle={closeSingleArticle}
+        publishArticle={publishArticle}
+      />
+    );
+  } else {
+    content = articles.map((article) => (
+      <ArticleContent
+        article={article}
+        singleArticle={false}
+        getSingleArticle={getSingleArticle}
+      />
+    ));
+  }
+
+  return (
+    <>
+      {message && (
+        <p id="message">{message}</p>
+      )}
+      {form}
+      {button}
+      <div className="articles">
+        {content}
+      </div>
+    </>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    authenticated: state.authenticated,
-    userRole: state.currentUser.role,
-    userEmail: state.currentUser.email,
-  };
-};
+export default ArticlePage
 
-export default connect(mapStateToProps)(ArticlePage);
