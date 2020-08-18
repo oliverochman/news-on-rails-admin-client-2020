@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": 1,
+    "email": "editor@mail.com",
+    "provider": "email",
+    "uid": "editor@mail.com",
+    "name": "shakespear",
+    "allow_password_change": false,
+    "role": "editor"
+  }
+}
