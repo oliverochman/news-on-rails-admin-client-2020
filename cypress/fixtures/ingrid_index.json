@@ -1,0 +1,28 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Happy Journalist",
+      "lead": "Happier than the world",
+      "content": "The life of a journalist involves creating lots of articles",
+      "category": "Lifestyle",
+      "image": "https://i.redd.it/w3kr4m2fi3111.png"
+    },
+    {
+      "id": 2,
+      "title": "World of Finance",
+      "lead": "Covid19 is having a massive impact globally",
+      "content": "Every economy is suffering across the globe",
+      "category": "Economy",
+      "image": "https://i.redd.it/w3kr4m2fi3111.png"
+    },
+    {
+      "id": 3,
+      "title": "Football Back in Action",
+      "lead": "Really after months of no games",
+      "content": "Germany has finally got the games underway",
+      "category": "Sports",
+      "image": "https://i.redd.it/w3kr4m2fi3111.png"
+    }
+  ]
+}

@@ -29,6 +29,7 @@ class CreateArticle extends Component {
     event.preventDefault();
     let responseMessage, articleParams, encodedImage, response;
     let { title, lead, content, image } = event.target;
+    const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
     
     try {
       articleParams = {
@@ -46,7 +47,7 @@ class CreateArticle extends Component {
       response = await axios.post(
         "http://localhost:3000/api/v1/articles",
         { article: articleParams },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: headers }
       );
         
       responseMessage = response.data.message;
@@ -58,7 +59,7 @@ class CreateArticle extends Component {
   };
 
   handleCategoryChange = (value) => {
-    this.setState({selectCategory: value})
+    this.setState({selectedCategory: value})
   }
 
   render() {
